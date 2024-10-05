@@ -50,6 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>Register Student - ClassKeeper</title>
 </head>
 <body>
+<?php include 'sidebar.php' ?>
     <h2>Register Student</h2>
     <?php if (isset($success)) echo "<p style='color: green;'>$success</p>"; ?>
 

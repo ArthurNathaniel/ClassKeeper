@@ -41,39 +41,48 @@ foreach ($classData as $row) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - ClassKeeper</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   
+    <?php include 'cdn.php' ?>
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/dashboard.css">
 </head>
 <body>
-    <h2>Welcome, <?php echo $_SESSION['email']; ?></h2>
-    <p>This is your admin dashboard.</p>
+<?php include 'sidebar.php' ?>
+<div class="dashboard_all">
 
-    <h3>Total Number of Students: <?php echo $totalStudents; ?></h3>
+ <div class="charts">
 
-    <h3>Gender Distribution</h3>
-    <canvas id="genderChart" width="400" height="200"></canvas>
-
-    <h3>Total Students in Each Class</h3>
-    <canvas id="classChart" width="400" height="200"></canvas>
+ <h3>Total Number of Students:</h3>
+ <h1> <?php echo $totalStudents; ?></h1>
+ </div>
+<div class="chart"> 
+<h3>Gender Distribution</h3>
+<canvas id="genderChart" width="400" height="200"></canvas>
+</div>
+<div class="chart">
+<h3>Total Students in Each Class</h3>
+<canvas id="classChart" width="400" height="200"></canvas>
+</div>
+   </div>
 
     <script>
         // Gender Distribution Chart
         const ctxGender = document.getElementById('genderChart').getContext('2d');
         const genderChart = new Chart(ctxGender, {
-            type: 'pie',
+            type: 'bar',
             data: {
                 labels: <?php echo json_encode($genderLabels); ?>,
                 datasets: [{
                     label: 'Gender Distribution',
                     data: <?php echo json_encode($genderCounts); ?>,
                     backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                    ],
-                    borderWidth: 1
+                                'rgb(255, 99, 132)',
+                                'rgb(54, 162, 235)',
+                                'rgb(255, 205, 86)',
+                                'rgb(75, 192, 192)',
+                                'rgb(153, 102, 255)',
+                                'rgb(255, 159, 64)'
+                            ],
                 }]
             },
             options: {
@@ -99,8 +108,14 @@ foreach ($classData as $row) {
                 datasets: [{
                     label: 'Number of Students',
                     data: <?php echo json_encode($classCounts); ?>,
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: [
+                                'rgb(255, 99, 132)',
+                                'rgb(54, 162, 235)',
+                                'rgb(255, 205, 86)',
+                                'rgb(75, 192, 192)',
+                                'rgb(153, 102, 255)',
+                                'rgb(255, 159, 64)'
+                            ],
                     borderWidth: 1
                 }]
             },

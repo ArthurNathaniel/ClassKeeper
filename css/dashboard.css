@@ -1,0 +1,26 @@
+.dashboard_all{
+    padding: 0 10%;
+    padding-block: 50px;
+}
+
+.chart{
+    background-color: #FFF;
+    margin-top: 50px;
+    text-align: center;
+    padding-block: 30px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+.charts{
+    background-color: #FFF;
+    margin-top: 50px;
+    text-align: center;
+    padding-block: 30px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+ canvas{
+    width: 100% !important;
+    height: 400px !important;
+    object-fit: contain;
+    
+}
