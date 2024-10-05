@@ -4,7 +4,6 @@ include 'db.php';
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
-    // Fetch student details by ID
     $stmt = $conn->prepare("SELECT * FROM students WHERE id = :id");
     $stmt->execute(['id' => $id]);
     $student = $stmt->fetch();

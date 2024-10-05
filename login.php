@@ -6,15 +6,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // Fetch the admin from the database
+
     $stmt = $conn->prepare("SELECT * FROM admins WHERE email = :email");
     $stmt->execute(['email' => $email]);
     $admin = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($admin && password_verify($password, $admin['password'])) {
-        $_SESSION['admin_id'] = $admin['id']; // Store admin ID in session
-        $_SESSION['email'] = $admin['email']; // Store email in session
-        header("Location: dashboard.php"); // Redirect to dashboard after login
+        $_SESSION['admin_id'] = $admin['id']; 
+        $_SESSION['email'] = $admin['email'];
+        header("Location: dashboard.php"); 
         exit();
     } else {
         $error = "Invalid email or password.";
@@ -29,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - ClassKeeper</title>
+    <?php include 'cdn.php' ?>
     <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/login.css">
 </head>

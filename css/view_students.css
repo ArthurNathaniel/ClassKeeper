@@ -1,0 +1,123 @@
+ .view_students_all{
+    padding: 0 10%;
+ }
+ table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+th{
+    background-color: #007D00;
+    color: #FFF;
+}
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding-top: 100px;
+}
+
+.modal-content {
+    background-color: white;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: red;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover, .close:focus {
+    color: black;
+    cursor: pointer;
+}
+
+.action-buttons button {
+    margin-right: 5px;
+}
+
+#noResults {
+    color: red;
+    font-weight: bold;
+    display: none; /* Hidden by default */
+    margin-top: 10px;
+}
+
+#classFilter {
+    margin-bottom: 10px;
+}
+
+.forms_title{
+    margin-block: 20px;
+}
+
+
+.forms{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+
+.forms input{
+    width: 100%;
+    height: 40px;
+    padding-left: 2%;
+    border: 1px solid #ddd;
+    background-color: #FFF;
+}
+.forms input:focus{
+    outline: none;
+}
+
+.forms select{
+    width: 100%;
+    height: 40px;
+    padding-left: 2%;
+    border: 1px solid #ddd;
+    background-color: #FFF;
+}
+.forms select:focus{
+    outline: none;
+}
+
+.action-buttons{
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.action-buttons button{
+    /* background-color: red; */
+    width: 100%;
+    height: 40px;
+    border: none;
+}
+
+.view{
+    background-color: #007D00;
+    color: #fff;
+}
+
+.edit{
+    background-color: #c5ef2d;
+    color: #fff; 
+}
+
+.delete{
+    background-color: rgb(161, 0, 0);
+    color: #FFF;
+}

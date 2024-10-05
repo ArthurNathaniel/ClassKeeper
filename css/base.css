@@ -50,11 +50,11 @@
   }
   
   .mobile a:hover {
-    color: #673de6;
+    color: #007D00;
   }
   
   #toggleButton {
-    background-color: #673de6;
+    background-color: #007D00;
     border: none;
     padding: 10px;
     top: 0;
@@ -94,7 +94,7 @@
   }
   
   .mobile a {
-    border-bottom: 2px dashed #dad9da;
+    border-top: 2px dashed #dad9da;
     width: 100%;
     padding: 0 10%;
     padding-block: 20px;
@@ -120,7 +120,7 @@
   }
   
   .navbar_all .mobile a.active {
-  background-color: #673de6;
+  background-color: #007D00;
   color: #FFF;
   
   }

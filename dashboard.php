@@ -66,7 +66,6 @@ foreach ($classData as $row) {
    </div>
 
     <script>
-        // Gender Distribution Chart
         const ctxGender = document.getElementById('genderChart').getContext('2d');
         const genderChart = new Chart(ctxGender, {
             type: 'bar',
@@ -99,7 +98,6 @@ foreach ($classData as $row) {
             }
         });
 
-        // Total Students in Each Class Chart
         const ctxClass = document.getElementById('classChart').getContext('2d');
         const classChart = new Chart(ctxClass, {
             type: 'bar',

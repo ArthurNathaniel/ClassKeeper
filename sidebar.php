@@ -24,14 +24,11 @@ $current_page = basename($_SERVER['PHP_SELF']); // Get the current page name
 
 
 <script>
-    // Get the button and sidebar elements
     var toggleButton = document.getElementById("toggleButton");
     var sidebar = document.querySelector(".mobile");
     var icon = toggleButton.querySelector("i");
 
-    // Add click event listener to the button
     toggleButton.addEventListener("click", function() {
-        // Toggle the visibility of the sidebar
         if (sidebar.style.display === "none" || sidebar.style.display === "") {
             sidebar.style.display = "flex";
             sidebar.style.flexDirection = "column";

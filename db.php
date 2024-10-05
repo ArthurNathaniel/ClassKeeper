@@ -1,9 +1,8 @@
 <?php
-// db.php
-$host = 'localhost'; // Replace with your database host
-$dbname = 'classkeeper'; // Replace with your database name
-$username = 'root'; // Replace with your database username
-$password = ''; // Replace with your database password
+$host = 'localhost'; 
+$dbname = 'classkeeper'; 
+$username = 'root'; 
+$password = ''; 
 
 try {
     $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);

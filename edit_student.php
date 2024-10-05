@@ -3,15 +3,12 @@ include 'db.php';
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    // Fetch the student's current details
     $stmt = $conn->prepare("SELECT * FROM students WHERE id = :id");
     $stmt->execute(['id' => $id]);
     $student = $stmt->fetch();
 }
 
-// Handle form submission to update student details
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Capture form data and update the student record
     $full_name = $_POST['full_name'];
     $dob = $_POST['dob'];
     $gender = $_POST['gender'];
@@ -24,15 +21,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $father_number = $_POST['father_number'];
     $assigned_class = $_POST['assigned_class'];
 
-    // Handle profile picture upload
-    $profile_picture = $student['profile_picture']; // Default to the current picture
+    $profile_picture = $student['profile_picture']; 
     if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] == 0) {
-        // If a new profile picture is uploaded, move it to the uploads directory
         $profile_picture = 'uploads/' . basename($_FILES['profile_picture']['name']);
         move_uploaded_file($_FILES['profile_picture']['tmp_name'], $profile_picture);
     }
 
-    // Update student in the database
+
     $stmt = $conn->prepare("UPDATE students SET 
         full_name = :full_name, 
         dob = :dob, 
@@ -64,55 +59,85 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'id' => $id
     ]);
 
-    header('Location: view_students.php'); // Redirect back to the student list
+    header('Location: view_students.php'); 
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Student - ClassKeeper</title>
+    <?php include 'cdn.php' ?>
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/register_students.css">
 </head>
+
 <body>
-
-    <h2>Edit Student</h2>
+<?php include 'sidebar.php' ?>
+<div class="register_students_all">
+  <div class="forms">
+  <h2>Edit Student</h2>
+  </div>
     <form method="POST" action="" enctype="multipart/form-data">
-        <label for="full_name">Full Name:</label>
-        <input type="text" id="full_name" name="full_name" value="<?php echo htmlspecialchars($student['full_name']); ?>" required><br>
+    <div class="forms_group">
+        <div class="forms">
+            <label for="full_name">Full Name:</label>
+            <input type="text" id="full_name" name="full_name" value="<?php echo htmlspecialchars($student['full_name']); ?>" required>
+        </div>
+        <div class="forms">
 
-        <label for="dob">Date of Birth:</label>
-        <input type="date" id="dob" name="dob" value="<?php echo htmlspecialchars($student['dob']); ?>" required><br>
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob" value="<?php echo htmlspecialchars($student['dob']); ?>" required>
+        </div>
 
-        <label for="gender">Gender:</label>
-        <select id="gender" name="gender" required>
-            <option value="Male" <?php echo ($student['gender'] == 'Male') ? 'selected' : ''; ?>>Male</option>
-            <option value="Female" <?php echo ($student['gender'] == 'Female') ? 'selected' : ''; ?>>Female</option>
-        </select><br>
+        <div class="forms">
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="Male" <?php echo ($student['gender'] == 'Male') ? 'selected' : ''; ?>>Male</option>
+                <option value="Female" <?php echo ($student['gender'] == 'Female') ? 'selected' : ''; ?>>Female</option>
+            </select>
+        </div>
 
-        <label for="email">Email Address:</label>
-        <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($student['email']); ?>" required><br>
+      <div class="forms">
+      <label for="email">Email Address:</label>
+      <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($student['email']); ?>" required>
+      </div>
 
+        <div class="forms">
         <label for="phone">Phone Number:</label>
-        <input type="text" id="phone" name="phone" value="<?php echo htmlspecialchars($student['phone']); ?>" required><br>
+        <input type="text" id="phone" name="phone" value="<?php echo htmlspecialchars($student['phone']); ?>" required>
+        </div>
 
-        <label for="address">Address:</label>
-        <textarea id="address" name="address" required><?php echo htmlspecialchars($student['address']); ?></textarea><br>
+       <div class="forms">
+       <label for="address">Address:</label>
+       <input type="text" name="address" id="address" value="<?php echo htmlspecialchars($student['address']); ?>">
 
-        <label for="mother_name">Mother's Name:</label>
-        <input type="text" id="mother_name" name="mother_name" value="<?php echo htmlspecialchars($student['mother_name']); ?>" required><br>
+       </div>
+       <div class="forms">
+       <label for="mother_name">Mother's Name:</label>
+        <input type="text" id="mother_name" name="mother_name" value="<?php echo htmlspecialchars($student['mother_name']); ?>" required>
 
-        <label for="mother_number">Mother's Phone Number:</label>
-        <input type="text" id="mother_number" name="mother_number" value="<?php echo htmlspecialchars($student['mother_number']); ?>" required><br>
+       </div>
+       <div class="forms">
+       <label for="mother_number">Mother's Phone Number:</label>
+       <input type="text" id="mother_number" name="mother_number" value="<?php echo htmlspecialchars($student['mother_number']); ?>" required>
+       </div>
 
-        <label for="father_name">Father's Name:</label>
-        <input type="text" id="father_name" name="father_name" value="<?php echo htmlspecialchars($student['father_name']); ?>" required><br>
+       <div class="forms">
+       <label for="father_name">Father's Name:</label>
+        <input type="text" id="father_name" name="father_name" value="<?php echo htmlspecialchars($student['father_name']); ?>" required>
 
-        <label for="father_number">Father's Phone Number:</label>
-        <input type="text" id="father_number" name="father_number" value="<?php echo htmlspecialchars($student['father_number']); ?>" required><br>
+       </div>
+       <div class="forms">
+       <label for="father_number">Father's Phone Number:</label>
+       <input type="text" id="father_number" name="father_number" value="<?php echo htmlspecialchars($student['father_number']); ?>" required>
+       </div>
 
-        <label for="assigned_class">Assigned Class:</label>
+      <div class="forms">
+      <label for="assigned_class">Assigned Class:</label>
         <select id="assigned_class" name="assigned_class" required>
             <option value="Form 1 - General Art 1" <?php echo ($student['assigned_class'] == 'Form 1 - General Art 1') ? 'selected' : ''; ?>>Form 1 - General Art 1</option>
             <option value="Form 1 - General Art 2" <?php echo ($student['assigned_class'] == 'Form 1 - General Art 2') ? 'selected' : ''; ?>>Form 1 - General Art 2</option>
@@ -153,16 +178,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <option value="Form 5 - Business 2" <?php echo ($student['assigned_class'] == 'Form 5 - Business 2') ? 'selected' : ''; ?>>Form 5 - Business 2</option>
             <option value="Form 5 - Science 1" <?php echo ($student['assigned_class'] == 'Form 5 - Science 1') ? 'selected' : ''; ?>>Form 5 - Science 1</option>
             <option value="Form 5 - Science 2" <?php echo ($student['assigned_class'] == 'Form 5 - Science 2') ? 'selected' : ''; ?>>Form 5 - Science 2</option>
-        </select><br>
+        </select>
+      </div>
 
-        <label for="profile_picture">Profile Picture:</label>
-        <input type="file" id="profile_picture" name="profile_picture"><br>
-        <?php if ($student['profile_picture']): ?>
-            <img src="<?php echo htmlspecialchars($student['profile_picture']); ?>" alt="Profile Picture" style="width: 100px; height: auto;"><br>
-        <?php endif; ?>
+        <div class="forms">
+            <label for="profile_picture">Profile Picture:</label>
+            <input type="file" id="profile_picture" name="profile_picture">
+            <?php if ($student['profile_picture']): ?>
+                <img src="<?php echo htmlspecialchars($student['profile_picture']); ?>" alt="Profile Picture" style="width: 100px; height: auto;">
+            <?php endif; ?>
+        </div>
 
-        <input type="submit" value="Update Student">
+        <!-- <input type="submit" value="Update Student"> -->
+        <div class="forms">
+            <button type="submit">Update Student</button>
+        </div>
     </form>
-
+            </div>
 </body>
+
 </html>

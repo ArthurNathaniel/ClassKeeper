@@ -18,118 +18,70 @@ $classes = $classStmt->fetchAll(PDO::FETCH_COLUMN);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Students - ClassKeeper</title>
-    <style>
-        /* Basic styles for the table and modal */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        table, th, td {
-            border: 1px solid black;
-            padding: 10px;
-        }
-
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding-top: 100px;
-        }
-
-        .modal-content {
-            background-color: white;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-        }
-
-        .close {
-            color: red;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover, .close:focus {
-            color: black;
-            cursor: pointer;
-        }
-
-        .action-buttons button {
-            margin-right: 5px;
-        }
-
-        #noResults {
-            color: red;
-            font-weight: bold;
-            display: none; /* Hidden by default */
-            margin-top: 10px;
-        }
-
-        #classFilter {
-            margin-bottom: 10px;
-        }
-    </style>
+    <?php include 'cdn.php' ?>
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/view_students.css">
 </head>
 <body>
+<?php include 'sidebar.php' ?>
+   <div class="view_students_all">
+  <div class="forms_title">
+  <h2>Students List</h2>
+  </div>
 
-    <h2>Students List</h2>
-
+<div class="forms">
     <!-- Class Filter Dropdown -->
-    <select id="classFilter" onchange="filterByClass()">
-        <option value="">All Classes</option>
-        <?php foreach ($classes as $class): ?>
-            <option value="<?php echo htmlspecialchars($class); ?>"><?php echo htmlspecialchars($class); ?></option>
-        <?php endforeach; ?>
-    </select>
+<select id="classFilter" onchange="filterByClass()">
+    <option value="">All Classes</option>
+    <?php foreach ($classes as $class): ?>
+        <option value="<?php echo htmlspecialchars($class); ?>"><?php echo htmlspecialchars($class); ?></option>
+    <?php endforeach; ?>
+</select>
+</div>
 
+<div class="forms">
     <!-- Search Input -->
-    <input type="text" id="searchInput" onkeyup="searchStudents()" placeholder="Search for names..">
+<input type="text" id="searchInput" onkeyup="searchStudents()" placeholder="Search for names..">
+</div>
 
-    <table id="studentsTable">
-        <thead>
-            <tr>
-                <th>Full Name</th>
-                <th>Class</th>
-                <th>Gender</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($students as $student): ?>
-            <tr>
-                <td><?php echo htmlspecialchars($student['full_name']); ?></td>
-                <td><?php echo htmlspecialchars($student['assigned_class']); ?></td>
-                <td><?php echo htmlspecialchars($student['gender']); ?></td>
-                <td class="action-buttons">
-                    <button onclick="openModal(<?php echo $student['id']; ?>)">View</button>
-                    <button onclick="editStudent(<?php echo $student['id']; ?>)">Edit</button>
-                    <button onclick="deleteStudent(<?php echo $student['id']; ?>)">Delete</button>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+<table id="studentsTable">
+    <thead>
+        <tr>
+            <th>Full Name</th>
+            <th>Class</th>
+            <th>Gender</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($students as $student): ?>
+        <tr>
+            <td><?php echo htmlspecialchars($student['full_name']); ?></td>
+            <td><?php echo htmlspecialchars($student['assigned_class']); ?></td>
+            <td><?php echo htmlspecialchars($student['gender']); ?></td>
+            <td class="action-buttons">
+                <button onclick="openModal(<?php echo $student['id']; ?>)" class="view">View</button>
+                <button onclick="editStudent(<?php echo $student['id']; ?>)" class="edit">Edit</button>
+                <button onclick="deleteStudent(<?php echo $student['id']; ?>)" class="delete">Delete</button>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
 
-    <!-- No Results Message -->
-    <div id="noResults">No students found matching your search.</div>
+<!-- No Results Message -->
+<div id="noResults">No students found matching your search.</div>
 
-    <!-- The Modal -->
-    <div id="studentModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h3>Student Details</h3>
-            <div id="studentDetails"></div>
-        </div>
+<!-- The Modal -->
+<div id="studentModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h3>Student Details</h3>
+        <div id="studentDetails"></div>
     </div>
+</div>
 
+   </div>
     <script>
         // Function to open the modal and fetch student details via AJAX
         function openModal(studentId) {
