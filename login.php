@@ -37,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
     <div class="login_all">
       <div class="login_box">
+      <div class="logo"></div>
       <div class="forms_title">
             <h2>Admin Login</h2>
         </div>

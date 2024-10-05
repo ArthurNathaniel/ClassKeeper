@@ -5,6 +5,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background: linear-gradient(135deg, #74eb84, #ace5b4);
+
 }
 
 .login_box{

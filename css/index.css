@@ -5,7 +5,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+    background: linear-gradient(135deg, #74eb84, #ace5b4);
 }
 
 .container {
@@ -28,16 +28,13 @@ p {
 }
 
 .login-btn {
-    padding: 10px 20px;
+    width: 100%;
+    height: 50px;
     font-size: 1rem;
     color: white;
-    background-color: #4CAF50;
+    background-color: #007D00;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
-.login-btn:hover {
-    background-color: #45a049;
-}

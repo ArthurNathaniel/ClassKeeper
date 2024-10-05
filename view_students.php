@@ -1,6 +1,10 @@
 <?php
 include 'db.php';
-
+session_start();
+if (!isset($_SESSION['admin_id'])) {
+    header("Location: login.php");
+    exit();
+}
 // Fetch all students from the database
 $stmt = $conn->prepare("SELECT id, full_name, gender, assigned_class FROM students");
 $stmt->execute();
