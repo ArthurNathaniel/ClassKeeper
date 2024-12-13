@@ -9,6 +9,8 @@ if (isset($_GET['id'])) {
     $student = $stmt->fetch();
 
     if ($student) {
+        echo "<p><strong>Profile Picture:</strong><br><img src='" . $student['profile_picture'] . "' alt='Profile Picture' style='width:100px;height:100px;'></p>";
+
         echo "<p><strong>Full Name:</strong> " . $student['full_name'] . "</p>";
         echo "<p><strong>Date of Birth:</strong> " . $student['dob'] . "</p>";
         echo "<p><strong>Gender:</strong> " . $student['gender'] . "</p>";
@@ -20,7 +22,6 @@ if (isset($_GET['id'])) {
         echo "<p><strong>Father's Name:</strong> " . $student['father_name'] . "</p>";
         echo "<p><strong>Father's Phone Number:</strong> " . $student['father_number'] . "</p>";
         echo "<p><strong>Assigned Class:</strong> " . $student['assigned_class'] . "</p>";
-        echo "<p><strong>Profile Picture:</strong><br><img src='" . $student['profile_picture'] . "' alt='Profile Picture' style='width:100px;height:100px;'></p>";
     } else {
         echo "Student not found.";
     }
